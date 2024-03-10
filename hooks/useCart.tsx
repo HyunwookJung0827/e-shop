@@ -1,6 +1,12 @@
 import { CartProductType } from "@/app/product/[productId]/ProductDetails";
 import Error from "next/error";
-import { createContext, useCallback, useContext, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 type CartContextType = {
   cartTotalQty: number;
@@ -22,6 +28,14 @@ export const CartContextProvider = (props: Props) => {
     null
   );
 
+  useEffect(() => {
+    const cartItems: any = localStorage.getItem("eShopCartItems");
+    const cProducts: CartProductType[] | null = JSON.parse(cartItems);
+
+    // Now that we got the cProducts, we can use it to update our state
+    setCartProducts(cProducts);
+  }, []);
+
   // This will receive a value of a product and add it to the cart
   const handleAddProductToCart = useCallback((product: CartProductType) => {
     setCartProducts((prev) => {
@@ -32,6 +46,9 @@ export const CartContextProvider = (props: Props) => {
       } else {
         updatedCart = [product];
       }
+
+      // Issue: If we refresh the page, we lose the cart
+      localStorage.setItem("eShopCartItems", JSON.stringify(updatedCart));
       return updatedCart;
     });
   }, []);

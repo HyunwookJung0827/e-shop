@@ -6,9 +6,13 @@ type CartContextType = {
 };
 
 export const CartContext = createContext<CartContextType | null>(null);
+
 interface Props {
+  // We will make it to accept any kind of upload
+  // This is like a placeholder
   [propName: string]: any;
 }
+
 export const CartContextProvider = (props: Props) => {
   const [cartTotalQty, setCartProduct] = useState(0);
   const value = {

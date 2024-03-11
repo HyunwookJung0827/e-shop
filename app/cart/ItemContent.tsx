@@ -12,8 +12,8 @@ interface ItemContentProps {
   item: CartProductType;
 }
 const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
-  const {handleRemoveProductFromCart} = useCart();
-    return (
+  const { handleRemoveProductFromCart, handleCartQtyIncrease } = useCart();
+  return (
     <div
       className="
   grid
@@ -51,7 +51,10 @@ const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
           <Link href={`/product/${item.id}`}>{truncateText(item.name)}</Link>
           <div>{item.selectedImg.color}</div>
           <div className="w-[70px]">
-            <button className="text-slate-500 underline" onClick={() => handleRemoveProductFromCart(item)}>
+            <button
+              className="text-slate-500 underline"
+              onClick={() => handleRemoveProductFromCart(item)}
+            >
               Remove
             </button>
           </div>
@@ -62,7 +65,7 @@ const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
         <SetQuantity
           cartCounter={true}
           cartProduct={item}
-          handleQtyIncrease={() => {}}
+          handleQtyIncrease={() => handleCartQtyIncrease(item)}
           handleQtyDecrease={() => {}}
         />
       </div>

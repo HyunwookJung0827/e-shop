@@ -6,9 +6,10 @@ import { MdArrowBack } from "react-icons/md";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
 import ItemContent from "./ItemContent";
+import { formatPrice } from "@/utils/formatPrice";
 
 const CartClient = () => {
-  const { cartProducts, handleClearCart } = useCart();
+  const { cartProducts, handleClearCart, cartTotalAmount } = useCart();
 
   if (!cartProducts || cartProducts.length === 0) {
     return (
@@ -55,7 +56,12 @@ const CartClient = () => {
       border-slate-200 py-4 flex justify-between gap-4"
       >
         <div className="w-[90px]">
-          <Button label="Clear Cart" onClick={() => handleClearCart()} small outline />
+          <Button
+            label="Clear Cart"
+            onClick={() => handleClearCart()}
+            small
+            outline
+          />
         </div>
         <div className="text-sm flex flex-col gap-1 items-start">
           <div
@@ -63,7 +69,7 @@ const CartClient = () => {
           text-base font-semibold"
           >
             <span>Subtotal</span>
-            <span>$1,000</span>
+            <span>{formatPrice(cartTotalAmount)}</span>
           </div>
 
           <p className="text-slate-500">

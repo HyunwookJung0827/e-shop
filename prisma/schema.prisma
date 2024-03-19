@@ -23,7 +23,7 @@ model Account {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([providerId, providerAccountId])
+@@unique([provider, providerAccountId])
 }
 
 model User {

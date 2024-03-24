@@ -50,6 +50,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
       redirect: false,
     }).then((callback) => {
       setIsLoading(false);
+      
       if (callback?.ok) {
         router.push("/cart");
         router.refresh();

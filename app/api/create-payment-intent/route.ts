@@ -6,17 +6,20 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 import { products } from "@/utils/products";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: "2022-11-15",
+  apiVersion: "2023-10-16",
 });
 
 // Do it again on server side; more secure
 const calculateOrderAmount = (items: CartProductType[]) => {
-  const totalPrice = items.reduce((acc, item) => {
+  const totalPrice: any = items.reduce((acc: any, item) => {
     const itemTotal = item.price * item.quantity;
     return acc + itemTotal;
   }, 0);
 
-  return totalPrice;
+  // 0.00006666 error -> floored it
+  const price: any = Math.floor(totalPrice);
+
+  return price;
 };
 
 export async function POST(request: Request) {

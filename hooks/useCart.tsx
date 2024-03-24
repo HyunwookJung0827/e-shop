@@ -34,6 +34,7 @@ export const CartContextProvider = (props: Props) => {
   const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(
     null
   );
+  const [paymentIntent, setPaymentIntent] = useState<string | null>(null);
 
   // console.log("qty", cartTotalQty, "amount", cartTotalAmount);
 

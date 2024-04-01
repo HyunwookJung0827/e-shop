@@ -58,6 +58,7 @@ model Review{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @db.ObjectId
   productId String @db.ObjectId
+  rating Int
   comment String
   createdDate DateTime @default(now())
 
